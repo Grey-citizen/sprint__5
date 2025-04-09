@@ -1,14 +1,9 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+from helpers import TestHelping as Helping
+from locators import TestPersonalAccLocators as TestPersAccLoc
 
 class TestPersonalAcc:
     def test_logout(self):
-        service = Service(executable_path='/Users/mistg/WebDriver/bin/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
+        driver = Helping.webdriver_fixture()
         driver.get("https://stellarburgers.nomoreparties.site/account/profile")
-        try:
-            driver.find_element(By.XPATH, "//button[text()='Выход']").click()
-            assert "Стартап" in driver.title or "Главная" in driver.title
-        finally:
-            driver.quit()
+        driver.find_element(TestPersAccLoc.PERSONAL_ACC_LOGOUT).click()
+        assert "Стартап" in driver.title or "Главная" in driver.title

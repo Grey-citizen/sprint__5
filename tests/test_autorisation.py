@@ -1,44 +1,33 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+from helpers import TestHelping as Helping
+from locators import TestAuthorizationLocators as TestAuthoLoc
 
 class TestAuthorisation:
+
     def test_login_in_acc_main_button(self):
-        service = Service(executable_path='/Users/mistg/WebDriver/bin/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
+        driver = Helping.webdriver_fixture()
         driver.get("https://stellarburgers.nomoreparties.site/")
-        try:
-            driver.find_element(By.XPATH, "//button[text()='Войти в аккаунт']").click()
-            assert "Вход" in driver.title
-        finally:
-            driver.quit()
+        login_button = driver.find_element(TestAuthoLoc.MAIN_BUTTON)
+        login_button.click()
+        assert "Вход" in driver.title
 
     def test_login_in_acc_personal_cabinet_button(self):
-        service = Service(executable_path='/Users/mistg/WebDriver/bin/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
+        driver = Helping.webdriver_fixture()
         driver.get("https://stellarburgers.nomoreparties.site/")
-        try:
-            driver.find_element(By.XPATH, "//a[text()='Личный кабинет']").click()
-            assert "Вход" in driver.title
-        finally:
-            driver.quit()
+        personal_cabinet_button = driver.find_element(TestAuthoLoc.HEADERS_PERSONAL_ACC)
+        personal_cabinet_button.click()
+        assert "Вход" in driver.title
 
     def test_login_in_acc_registration_form_button(self):
-        service = Service(executable_path='/Users/mistg/WebDriver/bin/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
+        driver = Helping.webdriver_fixture()
         driver.get("https://stellarburgers.nomoreparties.site/register")
-        try:
-            driver.find_element(By.XPATH, "//button[text()='Войти']").click()
-            assert "Вход" in driver.title
-        finally:
-            driver.quit()
+        registration_button = driver.find_element(TestAuthoLoc.REGISTRATION_AUTHORIZATION_BUTTON)
+        registration_button.click()
+        assert "Вход" in driver.title
+
 
     def test_login_in_acc_password_recovery_form_button(self):
-        service = Service(executable_path='/Users/mistg/WebDriver/bin/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
+        driver = Helping.webdriver_fixture()
         driver.get("https://stellarburgers.nomoreparties.site/forgot-password")
-        try:
-            driver.find_element(By.XPATH, "//button[text()='Войти']").click()
-            assert "Вход" in driver.title
-        finally:
-            driver.quit()
+        login_recovery_button = driver.find_element(TestAuthoLoc.RESET_PASSWORD_FORM_BUTTON)
+        login_recovery_button.click()
+        assert "Вход" in driver.title
