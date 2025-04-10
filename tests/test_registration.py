@@ -1,10 +1,11 @@
 from helpers import TestHelping as Helping
+from conftest import webdriver_fixture
 from locators import TestRegistrationLocators as TestRegLoc
 
 class TestRegistration:
 
-    def test_successful_registration(self):
-        driver = Helping.webdriver_fixture()
+    def test_successful_registration(self, webdriver_fixture):
+        driver = webdriver_fixture
         driver.get("https://stellarburgers.nomoreparties.site/register")
         first_name = "Сергей"
         last_name = "Матросов"
@@ -17,8 +18,8 @@ class TestRegistration:
         driver.find_element(TestRegLoc.REGISTRATION_BUTTON).click()
         assert driver.find_element(TestRegLoc.REGISTRATION_AUTHORIZATION_BUTTON), "Регистрация не удалась"
 
-    def test_incorrect_password_registration(self):
-        driver = Helping.webdriver_fixture()
+    def test_incorrect_password_registration(self, webdriver_fixture):
+        driver = webdriver_fixture
         driver.get("https://stellarburgers.nomoreparties.site/register")
         first_name = "Сергей"
         last_name = "Матросов"

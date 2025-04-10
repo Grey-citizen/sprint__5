@@ -1,18 +1,7 @@
 import random
 import string
-import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 
 class TestHelping:
-
-    @pytest.fixture(scope="function")
-    def webdriver_fixture(self):
-        service = Service(executable_path='/Users/mistg/WebDriver/bin/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
-        yield driver
-        driver.quit()
-
     @staticmethod
     def generate_unique_email(first_name, last_name, cohort_number, domain="yandex.ru"):
         random_digits = ''.join(random.choices('0123456789', k=3))
